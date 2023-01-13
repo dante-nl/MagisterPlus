@@ -1,0 +1,21 @@
+{
+  "name": "Magister+",
+  "description": "Extra features toegevoegd aan Magister",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html",
+	"default_icon": {
+		"128": "Media/MagisterPlus.png"
+	}
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "activeTab", "scripting", "tabs", "webNavigation"],
+  "host_permissions": ["http://*.magister.net/*", "https://*.magister.net/*"],
+  "icons": {
+    "128": "Media/MagisterPlus.png"
+  },
+  "minimum_chrome_version": "92"
+}
