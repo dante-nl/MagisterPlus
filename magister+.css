@@ -1,0 +1,129 @@
+:root {
+	--chrome-background: #fff !important;
+	--primary-background: #1d4e89 !important;
+	--secondary-background: #16679a !important;
+	--background-1: #16679a2a !important;
+	--background-2: #fff !important;
+	--background-3: #f6f6f6 !important;
+	--background-4: #323232 !important;
+	--background-5: #fafafa !important;
+	--background-6: #1a1a1a !important;
+	--background-7: #f2f2f2 !important;
+	--background-8: #f6f6f6 !important;
+	--background-9: transparent;
+	--background-10: #005b862a !important;
+	--background-11: #e1f4fd !important;
+	--primary-text-color: #1d4e892a !important;
+	--secondary-text-color: #000 !important;
+}
+
+.cijfer {
+	font-size: 0 !important
+}
+
+.cijfer:after {
+	font-size: 32px !important;
+	content: "10" !important;
+}
+
+* {
+	border-radius: 8px !important
+}
+
+.omschrijving {
+	font-size: 0 !important;
+}
+
+.omschrijving:after {
+	font-size: 10px !important;
+	content: "geweldig zijn";
+}
+
+.menu-host {
+	border-radius: 0px 8px 8px 0px !important;
+	/* background-color: #1d4e89 !important; */
+}
+
+.appbar-host {
+	border-radius: 0px !important;
+	/* background-color: #0899ba!important; */
+}
+
+td {
+	border-radius: 0px !important;
+}
+
+.menu-footer {
+	background-color: var(--background-10) !important;
+}
+
+.last-grade {
+	background-color: var(--secondary-background) !important;
+}
+
+/* img {
+	font-size: 0px !important;
+	height: 0px !important;
+} */
+
+#user-menu {
+	font-size: 0px !important;
+}
+
+/* .logo {
+	display: none !important;
+} */
+
+.fa-user-cog {
+	font-size: 0px !important;
+}
+
+.fa-user-cog:after {
+	font-size: 24px;
+	content: "💠";
+}
+
+#user-menu img {
+	font-size: 0px !important;
+	height: 0px !important;
+}
+
+.logo {
+	font-size: 0px !important;
+}
+
+.logo img {
+	display: none;
+}
+
+.logo a {
+	font-size: 0px !important;
+}
+
+.logo a:after {
+	font-size: 32px !important;
+	content: "Magister+";
+	color: white;
+}
+
+.collapsed-menu .logo a {
+	display: none !important;
+}
+
+dna-button {
+	border-color: var(--secondary-background) !important;
+	color: var(--primary-background) !important;
+}
+
+dna-button[variant="primary"] {
+	background-color: var(--secondary-background) !important;
+	color: white !important;
+}
+
+.ng-scope[icon-type="ok"] {
+	background: linear-gradient(90deg, rgba(63, 193, 192, 1) 0%, rgba(29, 78, 137, 1) 100%) !important;
+}
+
+* {
+	transition: all 0.5s;
+}
