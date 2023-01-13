@@ -1,0 +1,144 @@
+:root {
+	--red: #ef476f;
+	--yellow: #ffd166;
+	--green: #06d6a0;
+	--brand-color-a: #29335c;
+	--brand-color-b: #00d4ff;
+	--brand-color-a-transparent: #29335c35;
+	--brand-color-b-transparent: #00d4ff35;
+	--brand-color-a-extra-transparent: #29335c71;
+	--brand-color-b-extra-transparent: #00d5ff71;
+
+	--gradient: linear-gradient(90deg, rgba(63, 193, 192, 1) 0%, rgba(29, 78, 137, 1) 100%);
+	--gradient-reverse: linear-gradient(90deg, rgba(63, 193, 192, 1) 100%, rgba(29, 78, 137, 1) 0%);
+}
+
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	min-height: 600px;
+	min-width: 500px;
+	
+	background-color: #fefefe;
+	color: #000;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+b {
+	font-weight: 800;
+}
+
+p {
+	font-size: 1.2rem;
+}
+
+h3 {
+	font-size: 1.4rem;
+}
+
+.title {
+	font-size: 2.5rem;
+}
+
+h1 {
+	font-size: 2rem;
+}
+
+h2 {
+	font-size: 1.8rem;
+}
+
+
+/* Wrappers for the switches */
+.switch-wrapper {
+	margin-bottom: 3px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-radius: 8px;
+	transition: box-shadow 0.3s ease-in-out;
+	transition: transform .2s;
+}
+
+.switch-wrapper:hover {
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	transform: scale(1.01);
+	background: var(--brand-color-b-transparent) !important;
+}
+
+.perm-background .switch-wrapper {
+	background-color: var(--brand-color-b-extra-transparent);
+}
+
+.dangerous:hover {
+	background: #ef476f35 !important;
+}
+
+/* Apple-styled toggle switches */
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+	margin-left: 5px;
+}
+
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
+	border-radius: 34px;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+	border-radius: 50%;
+
+}
+
+input:checked+.slider {
+	background-color: var(--brand-color-b);
+}
+
+input:focus+.slider {
+	box-shadow: 0 0 1px var(--brand-color-b);
+}
+
+input:disabled+.slider {
+	background-color: var(--red);
+}
+
+input:disabled+.slider:before {
+	-webkit-transform: translateX(13px) !important;
+	-ms-transform: translateX(13px) !important;
+	transform: translateX(13px) !important;
+}
+
+input:checked+.slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+}
