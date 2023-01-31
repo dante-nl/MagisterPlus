@@ -16,6 +16,46 @@
 	--primary-text-color: #1d4e892a !important;
 	--secondary-text-color: #000 !important;
 }
+/* 
+@media(prefers-color-scheme: dark) {
+	:root {
+		--chrome-background: #000 !important;
+		--primary-background: #1d4e89 !important;
+		--secondary-background: #16679a !important;
+		--background-1: #16679a2a !important;
+		--background-2: #000 !important;
+		--background-3: #191919!important;
+		--background-4: #ebebeb !important;
+		--background-5: #191919 !important;
+		--background-6: #e8e8e8!important;
+		--background-7: #313131 !important;
+		--background-8: #313131 !important;
+		--background-9: transparent;
+		--background-10: #005b862a !important;
+		--background-11: #e1f4fd !important;
+		--primary-text-color: #4a71a12a !important;
+		--secondary-text-color: #fff !important;
+	}
+} */
+
+
+/* .main {
+	border-radius: 0px !important;
+}
+.main * {
+	background-color: var(--background-5) !important;
+}
+.sm-grid.k-grid .k-grid-content tr {
+	color: var(--secondary-text-color) !important
+} */
+
+.view {
+	background-color: var(--background-2) !important;
+}
+
+.k-grid-content {
+	background-color: var(--background-7) !important;
+}
 
 .cijfer {
 	font-size: 0 !important
@@ -80,7 +120,7 @@ td {
 
 .fa-user-cog:after {
 	font-size: 24px;
-	content: "💠";
+	content: "🤓";
 }
 
 #user-menu img {
@@ -124,6 +164,31 @@ dna-button[variant="primary"] {
 	background: linear-gradient(90deg, rgba(63, 193, 192, 1) 0%, rgba(29, 78, 137, 1) 100%) !important;
 }
 
+.ng-islotate-scope {
+	background-color: var(--background-8) !important;
+}
+
 * {
 	transition: all 0.5s;
+}
+
+.grade {
+	border-radius: 0px !important;
+}
+
+.k-header {
+	background: var(--background-3) !important;
+	border-radius: 0px !important;
+}
+
+.k-grid-content {
+	border-radius: 0px !important;
+}
+
+thead {
+	border-radius: 0 !important
+}
+
+.content-container {
+	background: var(--background-3) !important;
 }
