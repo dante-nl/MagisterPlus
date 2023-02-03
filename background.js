@@ -328,9 +328,10 @@ function showAdvertisement() {
 													</form>
 													<hr>
 													<p style="font-size: 1.2rem">Wat is nieuw?</p>
-													<p id="mg+_version_string">Versie <b><code>1.1.0</code></b></p>
+													<p id="mg+_version_string">Versie <b><code>1.2.0</code></b></p>
 													<br>
 													<p>• Je kan nu een les als belangrijk markeren door op <span style="color: #ef476f">&#9888;</span> te klikken.</p>
+													<p>• Notes op je homescherm</p>
 												</div>
 												<footer class="endlink">
 													<a href="https://github.com/dante-nl/MagisterPlus" title="">github</a>
