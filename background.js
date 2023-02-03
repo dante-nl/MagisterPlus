@@ -288,12 +288,14 @@ function showAdvertisement() {
 			// alert(1)
 			var todayGrid = document.getElementsByClassName("content-container");
 
+
 			try {
-				adAdded
+				document.getElementById("mg+_version_string").innerHTML
+				adAdded = true
 			} catch(e) {
 				adAdded = false
 			}
-			console.log(adAdded)
+
 			if (todayGrid.length > 0) {
 				if(adAdded == false) {
 					adAdded = true
@@ -314,11 +316,21 @@ function showAdvertisement() {
 													<h4>Logo gemaakt door <b>SnotjeXIV</b></h4>
 													<p>Magister+ is gemaakt omdat Magister op zich wel oké is, maar er waren zeker wat verbeterpuntjes. Zoals je totale gemiddelde in je cijferoverzicht en de kleuren.</p>
 													<hr>
-													<p style="font-size: 1.5rem">Wat is nieuw?</p>
-													<p>Versie <b><code>1.1.0</code></b></p>
+													<form id="mg+_notes_form">
+														<textarea id="mg+_notes" rows="10" cols="50"></textarea>
+														<br>
+														<button type="submit" style="
+															border: none;
+															border-radius: 8px;
+															padding: 10px 12px;
+															background: #00d4ff35;
+														">Opslaan</button>
+													</form>
+													<hr>
+													<p style="font-size: 1.2rem">Wat is nieuw?</p>
+													<p id="mg+_version_string">Versie <b><code>1.1.0</code></b></p>
 													<br>
-													<p>• Je kan nu een les als belangrijk markeren door op de <span style="color: #ef476f">&#9888;</span> te klikken</p>
-
+													<p>• Je kan nu een les als belangrijk markeren door op <span style="color: #ef476f">&#9888;</span> te klikken.</p>
 												</div>
 												<footer class="endlink">
 													<a href="https://github.com/dante-nl/MagisterPlus" title="">github</a>
@@ -335,6 +347,20 @@ function showAdvertisement() {
 					`
 					// document.getElementsByClassName("content-container")[0].innerHTML += html
 					document.getElementById("vandaagschermtop").insertAdjacentHTML("afterend", html)
+
+					// Notities
+					const form = document.getElementById("mg+_notes_form");
+					const textarea = document.getElementById("mg+_notes");
+
+					form.addEventListener("submit", (e) => {
+						e.preventDefault();
+						localStorage.setItem("mg+_notes", textarea.value);
+					});
+
+					const savedValue = localStorage.getItem("mg+_notes");
+					if (savedValue) {
+						textarea.value = savedValue;
+					}
 				}
 			}
 		}
@@ -405,7 +431,7 @@ function generateIDs() {
 				}
 			
 				for (var i2 = 0; i2 < localStorage.length; i2++){
-					if(localStorage.key(i2).includes("mg+")) {
+					if(localStorage.key(i2).includes("mg+") && !localStorage.key(i2).includes("mg+_notes")) {
 						dict = JSON.parse(localStorage.getItem(localStorage.key(i2).replace("⚠", "")))
 						for (var i3 = 0; i3 < elements.length; i3++) {
 							var child = elements[i3].querySelectorAll(".ng-binding");
@@ -436,3 +462,6 @@ chrome.runtime.onMessage.addListener(
     }
   }
 );
+// TODO: Release notes op homescherm
+// TODO: Zorg ervoor dat je lessen als belangrijk kan markeren
+// TODO: Zorg ervoor dat de extra tekst om vak als belangrijk te markeren zichtbaar is
