@@ -165,53 +165,39 @@ chrome.webNavigation.onCompleted.addListener(function(tabId, tab) {
 
 
 async function highlightGrades() {
-	// console.log(changeInfo["status"])
-	// console.log(changeInfo.status)
-	// if(changeInfo["status"] == "complete") {
-		// alert("Executing script")
-		items = await chrome.storage.local.get();
-		if(items["negativeHighlight"] == true) {
-			var intervalId = setInterval(function(){
-				if(document.querySelector(".grade")){
-					clearInterval(intervalId);
-					// your script here
-					var gradesGrid = document.getElementsByClassName("grade");
-					if (gradesGrid.length > 0) {
-						// elements with class "snake--mobile" exist
-						var grades = document.getElementsByClassName("grade");
-						grades_negative = 0;
-						grades_positive = 0;
-						averages_negative = 0;
-						for (var i = 0; i < grades.length; i++) {
-							if(document.getElementsByClassName("grade")[i].innerText.replace(",", ".") <= 5.4 
-								&& !isNaN(parseInt(document.getElementsByClassName("grade")[i].innerText)) 
-								&& !document.getElementsByClassName("grade")[i].classList.contains("gemiddelde_column")
-								&& document.getElementsByClassName("grade")[i].id.replace(/\D/g,"") < 301301 == false
-							) {
-								document.getElementsByClassName("grade")[i].style.setProperty("background-color", "#ffc4c4", "important");
-								grades_negative++;
-								if(document.getElementsByClassName("grade")[i].classList.contains("gemiddeldecolumn")) {
-									averages_negative++;
-								}
-							} else if(!isNaN(parseInt(document.getElementsByClassName("grade")[i].innerText))) {
-								grades_positive++;
+	items = await chrome.storage.local.get();
+	if(items["negativeHighlight"] == true) {
+		var intervalId = setInterval(function(){
+			if(document.querySelector(".grade")){
+				clearInterval(intervalId);
+
+				var gradesGrid = document.getElementsByClassName("grade");
+				if (gradesGrid.length > 0) {
+					var grades = document.getElementsByClassName("grade");
+					grades_negative = 0;
+					grades_positive = 0;
+					averages_negative = 0;
+					for (var i = 0; i < grades.length; i++) {
+						var grade = document.getElementsByClassName("grade")[i].innerText.replace(",", ".").replace("", "").replace("\n", "")
+						if(grade <= 5.4 
+							&& !isNaN(parseInt(grade)) 
+							&& !document.getElementsByClassName("grade")[i].classList.contains("gemiddelde_column")
+							&& document.getElementsByClassName("grade")[i].id.replace(/\D/g,"") < 301301 == false
+						) {
+							document.getElementsByClassName("grade")[i].style.setProperty("background-color", "#ffc4c4", "important");
+							grades_negative++;
+							if(document.getElementsByClassName("grade")[i].classList.contains("gemiddeldecolumn")) {
+								averages_negative++;
 							}
+						} else if(!isNaN(parseInt(document.getElementsByClassName("grade")[i].innerText))) {
+							grades_positive++;
 						}
 					}
 				}
-			}, 100);
-		}
-		
-		// 	alert("Loaded!")
-		// 	} else {
-			// 		highlightGrades()
-			// 		return
-			// 	}
-			// } else {
-				// 	highlightGrades(changeInfo)
-				// 	return
-				
 			}
+		}, 100);
+	}
+}
 			
 async function totalAverageGrades() {
 	items = await chrome.storage.local.get();
@@ -355,11 +341,12 @@ function showAdvertisement() {
 													</form>
 													<hr>
 													<p style="font-size: 1.2rem">Wat is nieuw?</p>
-													<p id="mg+_version_string">Versie <b><code>1.3.0</code></b></p>
+													<p id="mg+_version_string">Versie <b><code>1.3.1</code></b></p>
 													<br>
 													<p>• Je kan nu een les als belangrijk markeren door op <span style="color: #ef476f">&#9888;</span> te klikken.</p>
 													<p>• Notes op je homescherm</p>
 													<p>• Je kan nu shortcuts toevoegen. Dit moet je eerst aanzetten via de Magister+ popup</p>
+													<p>• Alle onvoldoendes worden nu gehighlight</p>
 												</div>
 												<footer class="endlink">
 													<a href="https://github.com/dante-nl/MagisterPlus" title="">github</a>
