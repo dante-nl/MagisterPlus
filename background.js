@@ -31,6 +31,17 @@ chrome.tabs.onReplaced.addListener(function() {
 				// args: [changeInfo],
 			})
 		} else if(thisTab.url.includes("/vandaag")) {
+			if(items["shortcuts"] == true) {
+				chrome.scripting.executeScript({
+					func: showShortcuts,
+					target: {
+						tabId: thisTab.id,
+						allFrames: true
+					},
+					injectImmediately: false,
+					// args: [changeInfo],
+				})
+			}
 			chrome.scripting.executeScript({
 				func: showAdvertisement,
 				target: {
@@ -40,6 +51,7 @@ chrome.tabs.onReplaced.addListener(function() {
 				injectImmediately: false,
 				// args: [changeInfo],
 			})
+			
 		} else if(thisTab.url.endsWith("/agenda")) {
 			chrome.scripting.executeScript({
 				func: generateIDs,
@@ -88,6 +100,17 @@ chrome.tabs.onUpdated.addListener(function() {
 				// args: [changeInfo],
 			})
 		} else if(thisTab.url.includes("/vandaag")) {
+			if(items["shortcuts"] == true) {
+				chrome.scripting.executeScript({
+					func: showShortcuts,
+					target: {
+						tabId: thisTab.id,
+						allFrames: true
+					},
+					injectImmediately: false,
+					// args: [changeInfo],
+				})
+			}
 			chrome.scripting.executeScript({
 				func: showAdvertisement,
 				target: {
@@ -300,7 +323,7 @@ function showAdvertisement() {
 				if(adAdded == false) {
 					adAdded = true
 					html = `
-						<div data-ng-repeat="column in columns" id="column2" class="widget-column ng-scope">
+						<div data-ng-repeat="column in columns" id="mg+_ad" class="widget-column ng-scope">
 							<div id="drop-2-0" class="droppable ng-isolate-scope ng-hide" data-sm-drag-drop="{drop: true}" data-drag-enabled="editMode" data-drop="handleDrop" data-ng-show="editMode" data-role="droptarget"></div>
 							<div data-ng-repeat="widget in columnedWidgets[column.order] | orderBy:'Positie.Volgnummer'" class="ng-scope">
 								<div id="drag-2-0" data-sm-drag-drop="{drag: true}" data-drag-enabled="editMode" data-hint-element="createHintElement" data-start-drag="dragStartExistingWidget(widget)" data-drag-end="dragEndExistingWidget()" class="ng-isolate-scope" data-role="draggable">
@@ -317,14 +340,18 @@ function showAdvertisement() {
 													<p>Magister+ is gemaakt omdat Magister op zich wel oké is, maar er waren zeker wat verbeterpuntjes. Zoals je totale gemiddelde in je cijferoverzicht en de kleuren.</p>
 													<hr>
 													<form id="mg+_notes_form">
-														<textarea id="mg+_notes" rows="10" cols="50"></textarea>
+														<textarea id="mg+_notes" rows="10" style="
+															width: 100%;
+															border: 1px solid #00d4ff;
+															border-radius: 8px;
+														"></textarea>
 														<br>
 														<button type="submit" style="
 															border: none;
 															border-radius: 8px;
 															padding: 10px 12px;
 															background: #00d4ff35;
-														">Opslaan</button>
+														" id="mg+_save_button">Opslaan</button>
 													</form>
 													<hr>
 													<p style="font-size: 1.2rem">Wat is nieuw?</p>
@@ -356,12 +383,215 @@ function showAdvertisement() {
 					form.addEventListener("submit", (e) => {
 						e.preventDefault();
 						localStorage.setItem("mg+_notes", textarea.value);
+						document.getElementById("mg+_save_button").innerText = "Opgeslagen"
+						document.getElementById("mg+_save_button").style.backgroundColor = "#06d6a035"
 					});
 
 					const savedValue = localStorage.getItem("mg+_notes");
 					if (savedValue) {
 						textarea.value = savedValue;
 					}
+					
+					form.addEventListener('input', function (evt) {
+						document.getElementById("mg+_save_button").innerText = "Opslaan"
+						document.getElementById("mg+_save_button").style.backgroundColor = "#00d4ff35"
+					});
+				}
+			}
+		}
+	})
+}
+
+function showShortcuts() {
+	var intervalId = setInterval(function(){
+		if(document.getElementById("mg+_ad")){
+			clearInterval(intervalId);
+			// your script here
+			// alert(1)
+			var todayGrid = document.getElementsByClassName("content-container");
+
+
+			try {
+				document.getElementById("mg+_shortcuts").innerHTML
+				shortcutAdded = true
+			} catch(e) {
+				shortcutAdded = false
+			}
+
+			if (todayGrid.length > 0) {
+				if(shortcutAdded == false) {
+					shortcutAdded = true
+					html = `
+						<div data-ng-repeat="column in columns" id="mg+_shortcuts" class="widget-column ng-scope">
+							<div id="drop-2-0" class="droppable ng-isolate-scope ng-hide" data-sm-drag-drop="{drop: true}" data-drag-enabled="editMode" data-drop="handleDrop" data-ng-show="editMode" data-role="droptarget"></div>
+							<div data-ng-repeat="widget in columnedWidgets[column.order] | orderBy:'Positie.Volgnummer'" class="ng-scope">
+								<div id="drag-2-0" data-sm-drag-drop="{drag: true}" data-drag-enabled="editMode" data-hint-element="createHintElement" data-start-drag="dragStartExistingWidget(widget)" data-drag-end="dragEndExistingWidget()" class="ng-isolate-scope" data-role="draggable">
+									<div ng-class="{'draggable-overlay draggable': editMode}">
+										<div id="magister+" class="widget-high widget ng-scope agenda-widget" magister+-ad="shortcuts" data-ng-init="widgetHigh = true">
+											<div class="block grade-widget ng-isolate-scope" data-sm-loading-indicator="{domain: 'aanmeldingen', overlay: false, timeout: 1000}">
+												<h3 data-ng-if="" class="ng-scope">
+													<span class="iconic resize-button ng-scope" data-ng-click="resize()" data-widget-resize-button="" data-widget-name="cijfers-leerling"></span>
+													<b class="ng-binding">Shortcuts</b>
+												</h3>
+												<div class="content">
+													<form id="mg+_shortcut_form">
+														<input type="text" id="urlInput" placeholder="https://example.com" style="
+															width: 100%;
+															border: 1px solid #00d4ff;
+															border-radius: 8px;
+															margin-bottom: 3px;
+														">
+														<button type="button" id="addUrlBtn" style="
+															border: none;
+															border-radius: 8px;
+															padding: 10px 12px;
+															background: #00d4ff35;
+														">Voeg URL toe</button>
+													</form>
+													<ul id="mg+_shortcuts_list" style="
+														background-color: none;
+														min-height: 0px;
+														border-bottom: none;
+														display: grid;
+														padding: 0
+													">
+														<!-- The URLs -->
+													</ul>
+
+												</div>
+												<footer class="endlink">
+													<!-- FOOTER -->
+												</footer>
+												</div>
+											</div>
+										</div>
+										<div id="drop-2-1" class="droppable ng-isolate-scope ng-hide" data-sm-drag-drop="{drop: true}" data-drag-enabled="editMode" data-drop="handleDrop" data-ng-show="editMode" data-role="droptarget">
+										</div>
+									</div><!-- end ngRepeat: widget in columnedWidgets[column.order] | orderBy:'Positie.Volgnummer' -->
+									<div class="widget spacer ng-hide" data-ng-hide="columnedWidgets[column.order]">&nbsp;</div>
+									<!-- </div> -->
+								</div>
+							</div>
+						
+					`
+					// document.getElementById("vandaagschermtop").insertAdjacentHTML("afterend", html)
+					document.getElementById("mg+_ad").insertAdjacentHTML("afterend", html)
+					//! CRUCIAAL NIET VERWIJDEREN ^ ^ ^
+
+					document.getElementById("mg+_shortcut_form").addEventListener("submit", function(event) {
+						event.preventDefault();
+						/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+						var urlInput = document.getElementById("urlInput").value;
+						var urlList = document.getElementById("mg+_shortcuts_list");
+						var urlArray = JSON.parse(localStorage.getItem("mg+_urls")) || [];
+						// Test if valid URL
+						var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi
+						var regex = new RegExp(expression);
+
+						if (!urlInput.match(regex)) {
+							document.getElementById("urlInput").style.borderColor = "#ef476f"
+							document.getElementById("urlInput").style.backgroundColor = "#ef476f35"
+							return
+						}
+						document.getElementById("urlInput").style.borderColor = "#00d4ff"
+						document.getElementById("urlInput").style.backgroundColor = "#fff"
+						// Add the new URL to the array
+						urlArray.push(urlInput);
+
+						// Save the updated array to local storage
+						localStorage.setItem("mg+_urls", JSON.stringify(urlArray));
+
+						// Clear the input field
+						document.getElementById("urlInput").value = "";
+
+						// Update the URL list on the page
+						urlList.innerHTML = "";
+						for (var i = 0; i < urlArray.length; i++) {
+							document.getElementById("mg+_shortcuts_list").innerHTML += `
+							<li style="
+								display: inline-flex; 
+								border: 1px solid #00d4ff;
+								margin-bottom: 2px;
+								height: auto;
+								line-height: 40px;
+							">
+									<a href="${urlArray[i]}" target="_blank" rel="noopener noreferrer" style="
+										padding-top: 0;
+										height: auto;
+										color: #00d4ff;
+										text-decoration: underline;
+									">${urlArray[i]}</a>
+									<p><button type="button" class="delete-button" style="
+										border: none;
+										height: fit-content;
+										color: #ef476f;
+									" data-index="${i}">⌫</button></p>
+							</li>`;
+						}
+					});
+
+					document.getElementById("mg+_shortcuts_list").addEventListener("click", function(event) {
+						if (event.target.classList.contains("delete-button")) {
+							var index = event.target.dataset.index;
+							var urlArray = JSON.parse(localStorage.getItem("mg+_urls")) || [];
+							urlArray.splice(index, 1);
+							localStorage.setItem("mg+_urls", JSON.stringify(urlArray));
+							
+							// Update the URL list on the page
+							var urlList = document.getElementById("mg+_shortcuts_list");
+							urlList.innerHTML = "";
+							for (var i = 0; i < urlArray.length; i++) {
+								document.getElementById("mg+_shortcuts_list").innerHTML += `
+									<li style="
+										display: inline-flex; 
+										border: 1px solid #00d4ff;
+										margin-bottom: 2px;
+										height: auto;
+										line-height: 40px;
+									">
+											<a href="${urlArray[i]}" target="_blank" rel="noopener noreferrer" style="
+												padding-top: 0;
+												height: auto;
+												color: #00d4ff;
+												text-decoration: underline;
+											">${urlArray[i]}</a>
+											<p><button type="button" class="delete-button" style="
+												border: none;
+												height: fit-content;
+												color: #ef476f;
+											" data-index="${i}">⌫</button></p>
+									</li>`;
+							}
+						}
+					});
+					var urlList = document.getElementById("mg+_shortcuts_list");
+					var urlArray = JSON.parse(localStorage.getItem("mg+_urls")) || [];
+					// Update the URL list on the page
+					urlList.innerHTML = "";
+					for (var i = 0; i < urlArray.length; i++) {
+						document.getElementById("mg+_shortcuts_list").innerHTML += `
+							<li style="
+								display: inline-flex; 
+								border: 1px solid #00d4ff;
+								margin-bottom: 2px;
+								height: auto;
+								line-height: 40px;
+							">
+								<a href="${urlArray[i]}" target="_blank" rel="noopener noreferrer" style="
+									padding-top: 0;
+									height: auto;
+									color: #00d4ff;
+									text-decoration: underline;
+								">${urlArray[i]}</a>
+								<p><button type="button" class="delete-button" style="
+									border: none;
+									height: fit-content;
+									color: #ef476f;
+								" data-index="${i}">⌫</button></p>
+							</li>`;
+					}
+					
+
 				}
 			}
 		}
@@ -432,7 +662,9 @@ function generateIDs() {
 				}
 			
 				for (var i2 = 0; i2 < localStorage.length; i2++){
-					if(localStorage.key(i2).includes("mg+") && !localStorage.key(i2).includes("mg+_notes")) {
+					if(localStorage.key(i2).includes("mg+") 
+					&& !localStorage.key(i2).includes("mg+_notes")
+					&& !localStorage.key(i2).includes("mg+_urls")) {
 						dict = JSON.parse(localStorage.getItem(localStorage.key(i2).replace("⚠", "")))
 						for (var i3 = 0; i3 < elements.length; i3++) {
 							var child = elements[i3].querySelectorAll(".ng-binding");
@@ -455,14 +687,11 @@ function generateIDs() {
 }
 
 chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    if( request.message === "form_submitted" ) {
-      chrome.storage.local.set({notes: request.data}, function() {
-        console.log("Data saved to local storage");
-      });
-    }
-  }
+	function(request, sender, sendResponse) {
+		if( request.message === "form_submitted" ) {
+			chrome.storage.local.set({notes: request.data}, function() {
+				console.log("Data saved to local storage");
+			});
+		}
+	}
 );
-// TODO: Release notes op homescherm
-// TODO: Zorg ervoor dat je lessen als belangrijk kan markeren
-// TODO: Zorg ervoor dat de extra tekst om vak als belangrijk te markeren zichtbaar is
