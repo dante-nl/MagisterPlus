@@ -87,3 +87,30 @@ function themeStatus() {
 		console.log(items["customTheme"])
 	});
 }
+
+// Custom shortcuts
+chrome.storage.local.get("shortcuts", function(items) {
+	if (items["shortcuts"] == true) {
+		document.getElementById("shortcutToggle").checked = true
+	} 
+})
+
+document.getElementById("shortcutToggle").oninput = function () { toggleShortcuts() };
+function toggleShortcuts() {
+	chrome.storage.local.get("shortcuts", function(items) {
+		if (items["shortcuts"] == true) {
+			chrome.storage.local.remove(["shortcuts"])
+		} else {
+			save_content = {
+				"shortcuts": true
+			}
+			chrome.storage.local.set(save_content)
+		}
+	})
+}
+
+function shortcutsStatus() {
+	chrome.storage.local.get("shortcuts", function(items) {
+		console.log(items["shortcuts"])
+	});
+}
