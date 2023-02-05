@@ -2,7 +2,7 @@
 	--chrome-background: #fff !important;
 	--primary-background: #1d4e89 !important;
 	--secondary-background: #16679a !important;
-	--background-1: #16679a2a !important;
+	--background-1: #16679a !important;
 	--background-2: #fff !important;
 	--background-3: #f6f6f6 !important;
 	--background-4: #323232 !important;
@@ -16,9 +16,9 @@
 	--primary-text-color: #1d4e892a !important;
 	--secondary-text-color: #000 !important;
 }
-/* 
+
 @media(prefers-color-scheme: dark) {
-	:root {
+	/* :root {
 		--chrome-background: #000 !important;
 		--primary-background: #1d4e89 !important;
 		--secondary-background: #16679a !important;
@@ -35,8 +35,28 @@
 		--background-11: #e1f4fd !important;
 		--primary-text-color: #4a71a12a !important;
 		--secondary-text-color: #fff !important;
+	} */
+	:root {
+		--chrome-background: #1a1a1a !important;
+		--primary-background: #16679a !important;
+		--primary-background-transp: #16679a2a !important;
+		--secondary-background: #1d4e89 !important;
+		--secondary-background-transp: #1d4e892a !important;
+		--background-1: #071220 !important;
+		--background-2: #1a1a1a !important;
+		--background-3: #323232 !important;
+		--background-4: #fff !important;
+		--background-5: #1f1f1f !important;
+		--background-6: #fff !important;
+		--background-7: #1a1a1a !important;
+		--background-8: #323232 !important;
+		--background-9: transparent;
+		--background-10: #005b862a !important;
+		--background-11: #1a1a1a !important;
+		--primary-text-color: #1d4e892a !important;
+		--secondary-text-color: #fff !important;
 	}
-} */
+}
 
 
 /* .main {
@@ -48,6 +68,27 @@
 .sm-grid.k-grid .k-grid-content tr {
 	color: var(--secondary-text-color) !important
 } */
+/* 
+.block * {
+	background-color: var(--background-3) !important;
+	color: var(--secondary-text-color) !important
+}
+*/
+ .appbar>div>a {
+	background-color: var(--secondary-background-transp) !important;
+}
+
+body {
+	background-color: var(--background-1) !important;
+}
+
+body>.container  {
+	background-color: var(--background-1) !important;
+}
+
+html {
+	background-color: var(--background-1) !important;
+}
 
 .view {
 	background-color: var(--background-2) !important;
@@ -147,7 +188,13 @@ td {
 }
 
 .collapsed-menu .logo a {
-	display: none !important;
+	font-size: 0px !important;
+}
+
+.collapsed-menu .logo a::after {
+	font-size: 32px !important;
+	content: "+";
+	color: white;
 }
 
 dna-button {
@@ -187,8 +234,4 @@ dna-button[variant="primary"] {
 
 thead {
 	border-radius: 0 !important
-}
-
-.content-container {
-	background: var(--background-3) !important;
 }
