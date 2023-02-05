@@ -355,10 +355,11 @@ function showAdvertisement() {
 													</form>
 													<hr>
 													<p style="font-size: 1.2rem">Wat is nieuw?</p>
-													<p id="mg+_version_string">Versie <b><code>1.2.0</code></b></p>
+													<p id="mg+_version_string">Versie <b><code>1.3.0</code></b></p>
 													<br>
 													<p>• Je kan nu een les als belangrijk markeren door op <span style="color: #ef476f">&#9888;</span> te klikken.</p>
 													<p>• Notes op je homescherm</p>
+													<p>• Je kan nu shortcuts toevoegen. Dit moet je eerst aanzetten via de Magister+ popup</p>
 												</div>
 												<footer class="endlink">
 													<a href="https://github.com/dante-nl/MagisterPlus" title="">github</a>
@@ -695,3 +696,6 @@ chrome.runtime.onMessage.addListener(
 		}
 	}
 );
+// TODO: Release notes op homescherm
+// TODO: Zorg ervoor dat je lessen als belangrijk kan markeren
+// TODO: Zorg ervoor dat de extra tekst om vak als belangrijk te markeren zichtbaar is
