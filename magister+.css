@@ -19,24 +19,6 @@
 
 @media(prefers-color-scheme: dark) {
 	/* :root {
-		--chrome-background: #000 !important;
-		--primary-background: #1d4e89 !important;
-		--secondary-background: #16679a !important;
-		--background-1: #16679a2a !important;
-		--background-2: #000 !important;
-		--background-3: #191919!important;
-		--background-4: #ebebeb !important;
-		--background-5: #191919 !important;
-		--background-6: #e8e8e8!important;
-		--background-7: #313131 !important;
-		--background-8: #313131 !important;
-		--background-9: transparent;
-		--background-10: #005b862a !important;
-		--background-11: #e1f4fd !important;
-		--primary-text-color: #4a71a12a !important;
-		--secondary-text-color: #fff !important;
-	} */
-	:root {
 		--chrome-background: #1a1a1a !important;
 		--primary-background: #16679a !important;
 		--primary-background-transp: #16679a2a !important;
@@ -55,7 +37,7 @@
 		--background-11: #1a1a1a !important;
 		--primary-text-color: #1d4e892a !important;
 		--secondary-text-color: #fff !important;
-	}
+	} */
 }
 
 
@@ -74,9 +56,82 @@
 	color: var(--secondary-text-color) !important
 }
 */
- .appbar>div>a {
+
+/* 
+/** Agenda  
+#afsprakenLijst tbody * {
+	background-color: var(--background-8);
+	color: var(--secondary-text-color);
+}
+
+#afsprakenLijst tbody strong,
+#afsprakenLijst tbody .k-icon.k-i-collapse,
+#afsprakenLijst tbody .today {
+	background-color: var(--background-8);
+	color: var(--secondary-text-color) !important;
+	visibility: visible;
+	display: inline;
+}
+
+#afsprakenLijst tbody span {
+	background: none !important;
+}
+
+#afsprakenLijst tr {
+	background-color: var(--background-8) !important;
+}
+
+#afsprakenLijst .important_class {
+	background-color: #ef476f35 !important;
+}
+
+#afsprakenLijst .important_class>* {
+	background-color: #ef476f35 !important;
+}
+
+/** Vandaag  
+.block .content * {
+	background: var(--background-2);
+	color: var(--secondary-text-color) !important;
+}
+.block .content {
+	background-color: var(--background-2) !important;
+	color: var(--secondary-text-color) !important;
+}
+
+.last-grade * {
+	background: var(--secondary-background) !important;
+}
+
+b {
+	background: none !important;
+}
+
+#vandaag-container .grade-widget ul {
+	background: none !important;
+}
+
+.block {
+	background-color: var(--background-2) !important;
+}
+
+.block h4 {
+	background: var(--background-3) !important;
+	color: var(--background-2) !important;
+}
+
+footer {
+	background: var(--background-3) !important;
+	color: var(--background-2) !important;
+}
+
+.appbar>div>a {
 	background-color: var(--secondary-background-transp) !important;
 }
+
+.block .content form {
+	background-color: var(--background-2) !important;
+} */
 
 body {
 	background-color: var(--background-1) !important;
